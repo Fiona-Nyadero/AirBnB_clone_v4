@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Starts a Flash Web Application """
+""" Starts a Flask Web Application """
 from models import storage
 from models.state import State
 from models.city import City
@@ -9,19 +9,14 @@ from os import environ
 from flask import Flask, render_template
 import uuid
 
-
 app = Flask(__name__)
-# app.jinja_env.trim_blocks = True
-# app.jinja_env.lstrip_blocks = True
-
 
 @app.teardown_appcontext
 def close_db(error):
     """ Remove the current SQLAlchemy Session """
     storage.close()
 
-
-@app.route('/1-hbnb', strict_slashes=False)
+@app.route('/100-hbnb', strict_slashes=False)
 def hbnb():
     """ HBNB is alive! """
     cache_id = str(uuid.uuid4())
@@ -38,12 +33,11 @@ def hbnb():
     places = storage.all(Place).values()
     places = sorted(places, key=lambda k: k.name)
 
-    return render_template('1-hbnb.html',
+    return render_template('100-hbnb.html',
                            cache_id=cache_id,
                            states=st_ct,
                            amenities=amenities,
                            places=places)
-
 
 if __name__ == "__main__":
     """ Main Function """
