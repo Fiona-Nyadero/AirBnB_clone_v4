@@ -43,4 +43,20 @@ document.addEventListener('DOMContentLoaded', function () {
             .catch(error => console.error('Error fetching places:', error));
     });
 
+    document.getElementById('reviews-toggle').addEventListener('click', function () {
+        const reviews = document.querySelectorAll('.review');
+        const toggleText = document.getElementById('reviews-toggle').textContent;
+    
+        if (toggleText === 'show') {
+            reviews.forEach(review => {
+                review.style.display = 'block';
+            });
+            document.getElementById('reviews-toggle').textContent = 'hide';
+        } else {
+            reviews.forEach(review => {
+                review.style.display = 'none';
+            });
+            document.getElementById('reviews-toggle').textContent = 'show';
+        }
+    });    
 });
